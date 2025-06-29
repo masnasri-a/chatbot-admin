@@ -7,7 +7,6 @@ class DigitalProAssistChatbot {
         this.isLoading = false;
         this.chatStorageKey = 'digitalProAssistChat';
         this.chatExpirationTime = 5 * 60 * 1000; // 5 minutes in milliseconds
-        
         this.init(containerSelector);
         this.setupEventListeners();
         this.loadChatHistory();
