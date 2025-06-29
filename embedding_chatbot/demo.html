@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Pro Assist - Embedding Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .code-example {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .section h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+        }
+
+        .feature h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .note {
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🤖 Digital Pro Assist Chatbot</h1>
+        <p>A beautiful, animated, and fully embeddable chatbot widget that can be integrated into any website.</p>
+
+        <div class="section">
+            <h2>🚀 Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🎨 Beautiful UI</h3>
+                    <p>Modern design with smooth animations and responsive layout</p>
+                </div>
+                <div class="feature">
+                    <h3>📱 Responsive</h3>
+                    <p>Works perfectly on desktop, tablet, and mobile devices</p>
+                </div>
+                <div class="feature">
+                    <h3>🔌 Easy Integration</h3>
+                    <p>Just one script tag to embed in any website</p>
+                </div>
+                <div class="feature">
+                    <h3>🔒 Secure API</h3>
+                    <p>API key authentication for secure communication</p>
+                </div>
+                <div class="feature">
+                    <h3>💬 Real-time Chat</h3>
+                    <p>Instant messaging with typing indicators and animations</p>
+                </div>
+                <div class="feature">
+                    <h3>⚡ Lightweight</h3>
+                    <p>Minimal footprint with optimized performance</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 Basic Integration</h2>
+            <p>To embed the chatbot in your website, simply add this script tag:</p>
+            <div class="code-example">
+&lt;!-- Basic embedding with API key --&gt;
+&lt;script src="https://your-domain.com/embedding.js" apiKey="your-api-key"&gt;&lt;/script&gt;
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Custom Container</h2>
+            <p>You can also specify a custom container for the chatbot:</p>
+            <div class="code-example">
+&lt;!-- HTML --&gt;
+&lt;div id="my-chatbot-container"&gt;&lt;/div&gt;
+
+&lt;!-- Script with custom container --&gt;
+&lt;script src="https://your-domain.com/embedding.js" 
+        apiKey="your-api-key" 
+        container="#my-chatbot-container"&gt;&lt;/script&gt;
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Manual Initialization</h2>
+            <p>For more control, you can initialize the chatbot manually:</p>
+            <div class="code-example">
+&lt;script src="https://your-domain.com/embedding.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// Manual initialization
+document.addEventListener('DOMContentLoaded', function() {
+    DigitalProAssist.init('your-api-key', '#custom-container');
+});
+&lt;/script&gt;
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌐 API Configuration</h2>
+            <p>The chatbot communicates with the following endpoint:</p>
+            <div class="code-example">
+POST https://n8n.anakanjeng.site/webhook-test/chatbot-digital-pro-assist
+
+Request Body:
+{
+  "apiKey": "your-api-key",
+  "message": "user message"
+}
+
+Expected Response:
+{
+  "response": "bot response message"
+}
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>📝 Note:</strong> Replace "your-api-key" with the actual API key provided to your clients. Each client should have their own unique API key for tracking and security.
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Make sure to host the embedding.js and chatbot-widget.js files on your server and update the script src URLs accordingly.
+        </div>
+
+        <div class="section">
+            <h2>📂 File Structure</h2>
+            <div class="code-example">
+embedding_chatbot/
+├── chatbot.html          # Standalone demo page
+├── chatbot-widget.js     # Main chatbot widget logic
+├── embedding.js          # Embedding script for integration
+└── demo.html            # This demo page
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎮 Try It Out</h2>
+            <p>The chatbot is already embedded on this page! Look for the blue chat button in the bottom-right corner.</p>
+        </div>
+    </div>
+
+    <!-- Embed the chatbot on this demo page -->
+    <script src="embedding.js" apiKey="digital-pro-assist"></script>
+</body>
+</html>
