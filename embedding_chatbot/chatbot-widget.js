@@ -1,7 +1,7 @@
 class DigitalProAssistChatbot {
     constructor(apiKey = null, containerSelector = null) {
         this.apiKey = apiKey || 'demo-key';
-        this.apiEndpoint = 'https://n8n.anakanjeng.site/webhook-test/chatbot-digital-pro-assist';
+        this.apiEndpoint = 'https://n8n.anakanjeng.site/webhook/chatbot-digital-pro-assist';
         this.isEmbedded = !!containerSelector;
         this.container = null;
         this.isLoading = false;
