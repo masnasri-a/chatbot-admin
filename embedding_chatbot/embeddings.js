@@ -58,7 +58,7 @@
 
             // Load the chatbot widget script if not already loaded
             if (!window.DigitalProAssistChatbot) {
-                await loadScript(baseUrl + 'chatbot-widget.js');
+                await loadScript(baseUrl + 'chatbot-widgets.js');
             }
 
             // Wait a bit for the script to fully load

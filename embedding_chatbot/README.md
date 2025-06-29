@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 embedding_chatbot/
 ├── chatbot.html          # Standalone demo page
-├── chatbot-widget.js     # Main chatbot widget logic
+├── chatbot-widgets.js     # Main chatbot widget logic
 ├── embedding.js          # Embedding script for integration
 ├── demo.html            # Integration demo page
 └── README.md            # This documentation
@@ -158,7 +158,7 @@ The chatbot automatically adapts to different screen sizes:
 your-website.com/
 ├── chatbot/
 │   ├── embedding.js
-│   ├── chatbot-widget.js
+│   ├── chatbot-widgets.js
 │   └── demo.html
 └── index.html (your main site)
 ```
