@@ -2,7 +2,7 @@
     'use strict';
     // Configuration
     const CHATBOT_CONFIG = {
-        scriptName: 'embedding.js',
+        scriptName: 'embeddings.js',
         widgetClass: 'digital-pro-assist-chatbot',
         defaultContainer: 'body'
     };
@@ -16,6 +16,10 @@
                 return script;
             }
         }
+        console.log(`Digital Pro Assist: No script tag found with name ${CHATBOT_CONFIG.scriptName}.`);
+        console.log("Script : "+document.currentScript);
+        
+        
         return document.currentScript;
     }
 
