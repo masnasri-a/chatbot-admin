@@ -7,14 +7,42 @@ class DigitalProAssistChatbot {
         this.isLoading = false;
         this.chatStorageKey = 'digitalProAssistChat';
         this.chatExpirationTime = 5 * 60 * 1000; // 5 minutes in milliseconds
+        
+        // Load configuration from localStorage
+        this.config = this.loadConfiguration();
+        
         this.init(containerSelector);
         this.setupEventListeners();
         this.loadChatHistory();
-        
         // Set up periodic expiration check (every minute)
         this.expirationCheckInterval = setInterval(() => {
             this.checkChatExpiration();
         }, 60000); // 60 seconds
+    }
+
+    loadConfiguration() {
+        try {
+            const configData = localStorage.getItem('digitalProAssistDetails');
+            if (configData) {
+                const config = JSON.parse(configData);
+                return {
+                    workspaceName: config.display_name || 'Digital Pro Assist',
+                    baseColor: config.base_color || '#007bff',
+                    buttonColor: config.button_color || '#007bff',
+                    slug: config.slug || 'digital-pro-assist'
+                };
+            }
+        } catch (error) {
+            console.error('Error loading configuration:', error);
+        }
+        
+        // Return default configuration if no config found or error occurred
+        return {
+            workspaceName: 'Digital Pro Assist',
+            baseColor: '#007bff',
+            buttonColor: '#007bff',
+            slug: 'digital-pro-assist'
+        };
     }
 
     init(containerSelector) {
@@ -63,7 +91,7 @@ class DigitalProAssistChatbot {
                 <div class="chatbot-window" id="chatbotWindow">
                     <div class="chatbot-header">
                         <div class="header-content">
-                            <div class="chatbot-title">Digital Pro Assist</div>
+                            <div class="chatbot-title">${this.config.workspaceName}</div>
                         </div>
                         <div class="menu-button" id="menuButton">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -123,7 +151,6 @@ class DigitalProAssistChatbot {
 
     injectStyles() {
         if (document.getElementById('digitalProAssistStyles')) return;
-
         const styles = document.createElement('style');
         styles.id = 'digitalProAssistStyles';
         styles.textContent = `
@@ -138,13 +165,13 @@ class DigitalProAssistChatbot {
             .chatbot-toggle {
                 width: 60px;
                 height: 60px;
-                background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+                background: linear-gradient(135deg, ${this.config.buttonColor} 0%, ${this.adjustColor(this.config.buttonColor, -20)} 100%);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+                box-shadow: 0 8px 25px ${this.hexToRgba(this.config.buttonColor, 0.3)};
                 transition: all 0.3s ease;
                 color: white;
                 position: fixed;
@@ -154,7 +181,7 @@ class DigitalProAssistChatbot {
 
             .chatbot-toggle:hover {
                 transform: scale(1.1);
-                box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4);
+                box-shadow: 0 12px 35px ${this.hexToRgba(this.config.buttonColor, 0.4)};
             }
 
             .chatbot-window {
@@ -209,7 +236,7 @@ class DigitalProAssistChatbot {
             }
 
             .chatbot-header {
-                background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+                background: linear-gradient(135deg, ${this.config.baseColor} 0%, ${this.adjustColor(this.config.baseColor, -20)} 100%);
                 color: white;
                 padding: 20px;
                 position: relative;
@@ -268,7 +295,7 @@ class DigitalProAssistChatbot {
             }
 
             .contact-item svg {
-                color: #007bff;
+                color: ${this.config.baseColor};
                 flex-shrink: 0;
             }
 
@@ -305,7 +332,7 @@ class DigitalProAssistChatbot {
             }
 
             .message.user .message-bubble {
-                background: #007bff;
+                background: ${this.config.baseColor};
                 color: white;
                 border-radius: 20px 20px 5px 20px;
             }
@@ -389,13 +416,13 @@ class DigitalProAssistChatbot {
             }
 
             .chat-input:focus {
-                border-color: #007bff;
+                border-color: ${this.config.baseColor};
             }
 
             .send-button {
                 width: 45px;
                 height: 45px;
-                background: #007bff;
+                background: ${this.config.baseColor};
                 border: none;
                 border-radius: 50%;
                 color: white;
@@ -407,7 +434,7 @@ class DigitalProAssistChatbot {
             }
 
             .send-button:hover {
-                background: #0056b3;
+                background: ${this.adjustColor(this.config.baseColor, -20)};
                 transform: scale(1.05);
             }
 
@@ -433,6 +460,26 @@ class DigitalProAssistChatbot {
         `;
         
         document.head.appendChild(styles);
+    }
+
+    // Helper method to convert hex color to rgba
+    hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // Helper method to adjust color brightness
+    adjustColor(hex, percent) {
+        const num = parseInt(hex.replace("#", ""), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = (num >> 16) + amt;
+        const G = (num >> 8 & 0x00FF) + amt;
+        const B = (num & 0x0000FF) + amt;
+        return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+            (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
     }
 
     setupEventListeners() {

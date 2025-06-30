@@ -4,7 +4,8 @@
     const CHATBOT_CONFIG = {
         scriptName: 'embeddings.js',
         widgetClass: 'digital-pro-assist-chatbot',
-        defaultContainer: 'body'
+        defaultContainer: 'body',
+        detailInfoAPI : 'https://n8n.anakanjeng.site/webhook/detail-info'
     };
 
     // Get the current script tag and extract apiKey
@@ -44,11 +45,31 @@
         });
     }
 
+    function getDetailsInfo(){
+        const apiKey = getApiKeyFromScript();
+        // Check if details already exist in localStorage
+        if (localStorage.getItem('digitalProAssistDetails')) {
+            console.log('Digital Pro Assist: Details already exist in localStorage');
+            return;
+        }
+        // Fetch details from the API and save to localStorage
+        fetch(`${CHATBOT_CONFIG.detailInfoAPI}?apiKey=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem('digitalProAssistDetails', JSON.stringify(data));
+                console.log('Digital Pro Assist: Details saved to localStorage', data);
+            })
+            .catch(error => {
+                console.error('Digital Pro Assist: Failed to fetch details', error);
+            });
+    }
+
     // Initialize the chatbot
     async function initializeChatbot() {
         try {
             const apiKey = getApiKeyFromScript();
             const container = getContainerFromScript();
+            getDetailsInfo();
 
             if (!apiKey) {
                 console.error('Digital Pro Assist: API key is required. Please add apiKey="your-api-key" to the script tag.');
