@@ -99,7 +99,6 @@
                         document.body.appendChild(defaultContainer);
                         targetContainer = '#digital-pro-assist-container';
                     }
-
                     // Initialize the chatbot widget
                     new window.DigitalProAssistChatbot(apiKey, targetContainer);
                     console.log('Digital Pro Assist Chatbot initialized successfully');
