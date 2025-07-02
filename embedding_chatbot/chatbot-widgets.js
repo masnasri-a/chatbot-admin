@@ -43,7 +43,9 @@ class DigitalProAssistChatbot {
             workspaceName: 'Digital Pro Assist',
             baseColor: '#007bff',
             buttonColor: '#007bff',
-            slug: 'digital-pro-assist'
+            slug: 'digital-pro-assist',
+            email: 'contact@digitalproassist.com',
+            phone: '+6285962656499'
         };
     }
 

@@ -106,7 +106,7 @@
                 } else {
                     console.error('Digital Pro Assist: Failed to load chatbot widget');
                 }
-            }, 100);
+            }, 2000);
 
         } catch (error) {
             console.error('Digital Pro Assist: Initialization error', error);
