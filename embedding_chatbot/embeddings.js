@@ -48,10 +48,10 @@
     async function getDetailsInfo(){
         const apiKey = getApiKeyFromScript();
         // Check if details already exist in localStorage
-        if (localStorage.getItem('digitalProAssistDetails')) {
-            console.log('Digital Pro Assist: Details already exist in localStorage');
-            return;
-        }
+        // if (localStorage.getItem('digitalProAssistDetails')) {
+        //     console.log('Digital Pro Assist: Details already exist in localStorage');
+        //     return;
+        // }
         // Fetch details from the API and save to localStorage
         await fetch(`${CHATBOT_CONFIG.detailInfoAPI}?apiKey=${apiKey}`)
             .then(response => response.json())

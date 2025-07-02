@@ -98,6 +98,8 @@ class DigitalProAssistChatbot {
                     </div>
                     
                     <div class="contact-info-block show" id="contactInfoBlock">
+                    ${ JSON.stringify(this.config.email)}
+                    ${ JSON.stringify(this.config.phone)}
                         <div class="contact-data">
                             ${this.config.email != '' ? `
                             <div class="contact-item">
