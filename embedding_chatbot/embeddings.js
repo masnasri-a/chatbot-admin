@@ -45,7 +45,7 @@
         });
     }
 
-    function getDetailsInfo(){
+    async function getDetailsInfo(){
         const apiKey = getApiKeyFromScript();
         // Check if details already exist in localStorage
         if (localStorage.getItem('digitalProAssistDetails')) {
@@ -53,7 +53,7 @@
             return;
         }
         // Fetch details from the API and save to localStorage
-        fetch(`${CHATBOT_CONFIG.detailInfoAPI}?apiKey=${apiKey}`)
+        await fetch(`${CHATBOT_CONFIG.detailInfoAPI}?apiKey=${apiKey}`)
             .then(response => response.json())
             .then(data => {
                 localStorage.setItem('digitalProAssistDetails', JSON.stringify(data));
@@ -69,7 +69,7 @@
         try {
             const apiKey = getApiKeyFromScript();
             const container = getContainerFromScript();
-            getDetailsInfo();
+            await getDetailsInfo();
 
             if (!apiKey) {
                 console.error('Digital Pro Assist: API key is required. Please add apiKey="your-api-key" to the script tag.');
